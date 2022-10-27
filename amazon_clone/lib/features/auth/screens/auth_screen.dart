@@ -1,6 +1,7 @@
 import 'package:amazon_clone/common/widgets/custom_button.dart';
 import 'package:amazon_clone/common/widgets/custom_text_field.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
+import 'package:amazon_clone/features/auth/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -22,6 +23,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.signUp;
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
+  final AuthService authService = AuthService();
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -33,6 +35,21 @@ class _AuthScreenState extends State<AuthScreen> {
     _emailController.dispose();
     _nameController.dispose();
     _passwordController.dispose();
+  }
+
+  void signUpUser() {
+    authService.signUpUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+        name: _nameController.text,
+        context: context);
+  }
+
+  void signInUser() {
+    authService.signInUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+        context: context);
   }
 
   @override
@@ -108,7 +125,8 @@ class _AuthScreenState extends State<AuthScreen> {
                         CustomButton(
                             text: "Sign Up",
                             onTap: () {
-                              debugPrint("");
+                              if (_signUpFormKey.currentState!.validate())
+                                signUpUser();
                             }),
                       ],
                     ),
@@ -135,7 +153,7 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               if (_auth == Auth.signIn)
                 Form(
-                  key: _signUpFormKey,
+                  key: _signInFormKey,
                   child: Container(
                     color: Colors.white,
                     padding: const EdgeInsets.all(8.0),
@@ -169,7 +187,10 @@ class _AuthScreenState extends State<AuthScreen> {
                         CustomButton(
                             text: "Sign In",
                             onTap: () {
-                              debugPrint("Login");
+                              if (_signInFormKey.currentState!.validate()) {
+                                signInUser();
+                                debugPrint("Login");
+                              }
                             }),
                       ],
                     ),

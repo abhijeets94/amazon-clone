@@ -34,7 +34,12 @@ class CustomTextField extends StatelessWidget {
       ),
       obscureText: obscureText,
       keyboardType: textInputType,
-      validator: (val) {},
+      validator: (val) {
+        if (val == null || val.isEmpty) {
+          return 'Enter your $hintText';
+        }
+        return null;
+      },
     );
   }
 }
