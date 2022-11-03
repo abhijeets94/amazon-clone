@@ -21,7 +21,6 @@ class BottomNavigationItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("Page is $page");
     return Container(
       width: bottomNavigationBarWidth,
       decoration: BoxDecoration(

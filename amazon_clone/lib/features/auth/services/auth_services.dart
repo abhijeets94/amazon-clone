@@ -66,9 +66,6 @@ class AuthService {
             'Content-Type': 'application/json; charset=UTF-8'
           });
 
-      debugPrint(
-          "Response is ${response.statusCode} and body is ${response.body}");
-
       httpErrorHandle(
         response: response,
         context: context,
@@ -106,7 +103,7 @@ class AuthService {
       var tokenRes = await http.post(
         Uri.parse("$uri/tokenIsValid"),
         headers: <String, String>{
-          'Content-type': 'application/json; charset=UTF-8',
+          'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': token!
         },
       );
@@ -116,11 +113,10 @@ class AuthService {
         http.Response userRes = await http.get(
           Uri.parse("$uri/"),
           headers: <String, String>{
-            'Content-type': 'application/json; charset=UTF-8',
+            'Content-Type': 'application/json; charset=UTF-8',
             'x-auth-token': token,
           },
         );
-
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUser(userRes.body);
       }

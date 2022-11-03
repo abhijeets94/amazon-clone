@@ -1,4 +1,5 @@
 import 'package:amazon_clone/constants/global_variable.dart';
+import 'package:amazon_clone/features/account/widgets/single_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -47,15 +48,7 @@ class _OrdersState extends State<Orders> {
                   scrollDirection: Axis.horizontal,
                   itemCount: list.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: 200,
-                      width: 200,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(list[index]),
-                        ),
-                      ),
-                    );
+                    return SingleProduct(image: list[index]);
                   })),
         ),
       ],

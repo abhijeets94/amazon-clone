@@ -7,13 +7,15 @@ class CustomTextField extends StatelessWidget {
   final String? hintText;
   final bool obscureText;
   final TextInputType? textInputType;
-  const CustomTextField(
-      {Key? key,
-      required this.controller,
-      this.hintText,
-      this.obscureText = false,
-      this.textInputType})
-      : super(key: key);
+  final int maxLines;
+  const CustomTextField({
+    Key? key,
+    required this.controller,
+    this.hintText,
+    this.obscureText = false,
+    this.textInputType,
+    this.maxLines = 1,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class CustomTextField extends StatelessWidget {
         }
         return null;
       },
+      maxLines: maxLines,
     );
   }
 }
