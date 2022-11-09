@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:amazon_clone/models/rating.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
@@ -10,6 +11,7 @@ class Product {
   final double quantity;
   final double price;
   final String category;
+  final List<Rating>? rating;
   String? id;
   Product({
     required this.name,
@@ -18,6 +20,7 @@ class Product {
     required this.quantity,
     required this.price,
     required this.category,
+    this.rating,
     this.id,
   });
 
@@ -30,6 +33,7 @@ class Product {
       'price': price,
       'category': category,
       'id': id,
+      'rating': rating,
     };
   }
 
@@ -42,6 +46,13 @@ class Product {
       price: map['price'].toDouble() as double,
       category: map['category'] as String,
       id: map['_id'] != null ? map['_id'] as String : null,
+      rating: map['ratings'] != null
+          ? List<Rating>.from(
+              map['ratings']?.map(
+                (x) => Rating.fromMap(x),
+              ),
+            )
+          : null,
     );
   }
 

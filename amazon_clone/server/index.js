@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 //IMPORT FROM FILES
 const authRouter = require('./routes/auth');
 const adminRouter = require('./routes/admin');
+const productRouter = require("./routes/product");
+const userRouter = require("./routes/user");
 
 
 
@@ -22,6 +24,8 @@ const DB = "mongodb+srv://abhijeets94:abhijeet1234@cluster0.7ur2yjy.mongodb.net/
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
+app.use(productRouter);
+app.use(userRouter);
 
 //Connections 
 mongoose.connect(DB).then(() => {

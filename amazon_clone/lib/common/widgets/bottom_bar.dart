@@ -1,11 +1,14 @@
 import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:amazon_clone/features/account/screens/account_screen.dart';
+import 'package:amazon_clone/features/cart/screens/cart_screen.dart';
 import 'package:amazon_clone/features/home/screens/home_screens.dart';
+import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:amazon_clone/utils/bottom_navagation_item.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 
 class BottomBar extends StatefulWidget {
   static const String routeName = "/actual_home";
@@ -23,9 +26,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
-    const Center(
-      child: Text("Cart Page"),
-    ),
+    const CartScreen(),
   ];
 
   void updatePage(int page) {
@@ -36,6 +37,7 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
+    final userCartLen = context.watch<UserProvider>().user.cart.length;
     return Scaffold(
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
@@ -86,7 +88,7 @@ class _BottomBarState extends State<BottomBar> {
                 ),
                 child: Badge(
                   elevation: 0,
-                  badgeContent: const Text("2"),
+                  badgeContent: Text(userCartLen.toString()),
                   badgeColor: Colors.white,
                   child: Icon(Icons.shopping_cart_outlined),
                 ),

@@ -2,7 +2,7 @@ const e = require('express');
 const express = require('express');
 const admin = require('../middlewares/admin');
 const adminRouter = express.Router();
-const Product = require('../model/product');
+const {Product} = require('../model/product');
 const { emit } = require('../model/user');
 const User = require('../model/user');
 
