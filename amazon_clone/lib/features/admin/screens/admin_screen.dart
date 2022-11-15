@@ -1,5 +1,6 @@
 import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:amazon_clone/features/account/screens/account_screen.dart';
+import 'package:amazon_clone/features/admin/screens/orders_screen.dart';
 import 'package:amazon_clone/features/admin/screens/posts_screen.dart';
 import 'package:amazon_clone/features/home/screens/home_screens.dart';
 import 'package:amazon_clone/utils/bottom_navagation_item.dart';
@@ -26,9 +27,7 @@ class _AdminScreenState extends State<AdminScreen> {
     const Center(
       child: Text("Analytics Page"),
     ),
-    const Center(
-      child: Text("Cart Page"),
-    ),
+    const OrdersScreen(),
   ];
 
   void updatePage(int page) {

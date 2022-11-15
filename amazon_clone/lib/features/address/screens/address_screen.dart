@@ -109,7 +109,17 @@ class _AddressScreenState extends State<AddressScreen> {
       addressToBeUsed = addressFromProvider;
     } else {
       showSnackBar(context, 'Error');
+      debugPrint("Error!!!!!!!!!!!!!!!");
     }
+
+    // //TODO: Added this to check orders, remove it when deployed
+    // addressServices.placeOrder(
+    //   context: context,
+    //   address: addressToBeUsed,
+    //   totalSum: double.parse(
+    //     widget.totalAmount,
+    //   ),
+    // );
   }
 
   @override

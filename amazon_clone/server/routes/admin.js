@@ -3,6 +3,7 @@ const express = require('express');
 const admin = require('../middlewares/admin');
 const adminRouter = express.Router();
 const {Product} = require('../model/product');
+const Order = require('../model/order')
 const { emit } = require('../model/user');
 const User = require('../model/user');
 
@@ -33,6 +34,16 @@ adminRouter.get('/admin/get-all-products', admin,  async (req, res) => {
     try {    
         const products = await Product.find({}); //gives all the product we need
         res.json(products);   
+    } catch (error) {
+        res.status(500).json({error:e.message});
+    }
+});
+//get all order
+
+adminRouter.get('/admin/get-all-orders', admin,  async (req, res) => {
+    try {    
+        const orders = await Order.find({}); //gives all the product we need
+        res.json(orders);   
     } catch (error) {
         res.status(500).json({error:e.message});
     }

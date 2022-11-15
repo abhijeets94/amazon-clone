@@ -1,5 +1,9 @@
+import 'package:amazon_clone/common/widgets/loader.dart';
 import 'package:amazon_clone/constants/global_variable.dart';
+import 'package:amazon_clone/features/account/services/account_services.dart';
 import 'package:amazon_clone/features/account/widgets/single_product.dart';
+import 'package:amazon_clone/features/order_details/screens/order_details.dart';
+import 'package:amazon_clone/models/order.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -12,46 +16,67 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-  List list = [
-    'https://images.unsplash.com/photo-1666861986217-b011a4eb7d4b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-    'https://images.unsplash.com/photo-1666861986217-b011a4eb7d4b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-    'https://images.unsplash.com/photo-1666861986217-b011a4eb7d4b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-    'https://images.unsplash.com/photo-1666861986217-b011a4eb7d4b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-  ];
+  List<Order>? order;
+  final AccountServices accountServices = AccountServices();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchOrder();
+  }
+
+  void fetchOrder() async {
+    order = await accountServices.fetchMyOrders(context: context);
+    setState(() {});
+    debugPrint("order is $order");
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return order == null
+        ? const Loader()
+        : Column(
             children: [
-              Text(
-                "Your Orders",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Your Orders",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      "See All",
+                      style: TextStyle(
+                          color: GlobalVariables.selectedNavBarColor,
+                          fontSize: 15),
+                    ),
+                  ],
+                ),
               ),
-              Text(
-                "See All",
-                style: TextStyle(
-                    color: GlobalVariables.selectedNavBarColor, fontSize: 15),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, top: 20, right: 0),
+                child: Container(
+                    height: 170,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: order!.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, OrderDetailsScreen.routeName,
+                                  arguments: order![index]);
+                            },
+                            child: SingleProduct(
+                                image: order![index].products[0].images[0]),
+                          );
+                        })),
               ),
             ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10.0, top: 20, right: 0),
-          child: Container(
-              height: 170,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: list.length,
-                  itemBuilder: (context, index) {
-                    return SingleProduct(image: list[index]);
-                  })),
-        ),
-      ],
-    );
+          );
   }
 }
