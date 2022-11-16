@@ -1,3 +1,5 @@
+import 'package:amazon_clone/features/account/screens/account_screen.dart';
+import 'package:amazon_clone/features/account/services/account_services.dart';
 import 'package:amazon_clone/features/account/widgets/account_button.dart';
 import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +15,7 @@ class TopButton extends StatefulWidget {
 }
 
 class _TopButtonState extends State<TopButton> {
+  AccountServices accountServices = AccountServices();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,17 +32,9 @@ class _TopButtonState extends State<TopButton> {
         Row(
           children: [
             AccountButton(
-                label: 'Log Out',
-                onTap: () async {
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  prefs.setString('x-auth-token', '');
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    AuthScreen.routeName,
-                    (route) => false,
-                  );
-                }),
+              label: 'Log Out',
+              onTap: () => accountServices.logOut(context),
+            ),
             AccountButton(label: 'Your Wishlist', onTap: () {}),
           ],
         ),

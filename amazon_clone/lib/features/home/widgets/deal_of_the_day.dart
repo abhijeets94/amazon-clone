@@ -60,32 +60,35 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
                       height: 235,
                       fit: BoxFit.fitHeight,
                     ),
-                    Container(
-                      padding: const EdgeInsets.only(
-                        left: 15,
-                        top: 5,
-                        right: 40,
-                      ),
-                      alignment: Alignment.topLeft,
-                      child: const Text(
-                        '\$123',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      padding: const EdgeInsets.only(
-                        left: 15,
-                        top: 5,
-                        right: 40,
-                      ),
-                      child: Text(
-                        'Rivaan',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                    // Container(
+                    //   padding: const EdgeInsets.only(
+                    //     left: 15,
+                    //     top: 5,
+                    //     right: 40,
+                    //   ),
+                    //   alignment: Alignment.topLeft,
+                    //   child: const Text(
+                    //     '\$123',
+                    //     style: TextStyle(
+                    //       fontSize: 18,
+                    //     ),
+                    //   ),
+                    // ),
+                    // Container(
+                    //   alignment: Alignment.topLeft,
+                    //   padding: const EdgeInsets.only(
+                    //     left: 15,
+                    //     top: 5,
+                    //     right: 40,
+                    //   ),
+                    //   child: Text(
+                    //     'Rivaan',
+                    //     maxLines: 2,
+                    //     overflow: TextOverflow.ellipsis,
+                    //   ),
+                    // ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
