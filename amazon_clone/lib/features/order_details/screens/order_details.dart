@@ -211,7 +211,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               'Tracking',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
