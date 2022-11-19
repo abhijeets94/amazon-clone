@@ -1,4 +1,6 @@
+import 'package:amazon_clone/constants/global_variable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -10,19 +12,32 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return NeumorphicButton(
       onPressed: onTap,
-      child: Text(
-        text,
-        style: TextStyle(color: color == null ? Colors.white : Colors.black),
+
+      style: const NeumorphicStyle(
+        shape: NeumorphicShape.flat,
+        color: Colors.black,
       ),
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size(
-          double.infinity,
-          50,
+      child: Container(
+        width: double.maxFinite,
+        height: 30,
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
         ),
-        primary: color,
       ),
+      // style: ElevatedButton.styleFrom(
+      //   minimumSize: const Size(
+      //     double.infinity,
+      //     50,
+      //   ),
+      //   primary: color,
+      // ),
     );
   }
 }

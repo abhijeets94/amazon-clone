@@ -1,5 +1,6 @@
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
 
 class AddressBox extends StatelessWidget {
@@ -14,8 +15,8 @@ class AddressBox extends StatelessWidget {
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color.fromARGB(255, 114, 226, 221),
-            Color.fromARGB(255, 162, 236, 233),
+            Color.fromARGB(255, 222, 243, 242),
+            Color.fromARGB(255, 255, 255, 255),
           ],
           stops: [
             0.5,
@@ -42,11 +43,14 @@ class AddressBox extends StatelessWidget {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 5, top: 2),
-            child: Icon(
+          Padding(
+            padding: const EdgeInsets.only(left: 5, top: 2),
+            child: NeumorphicIcon(
               Icons.arrow_drop_down_outlined,
               size: 18,
+              style: const NeumorphicStyle(
+                color: Colors.black,
+              ),
             ),
           ),
         ],

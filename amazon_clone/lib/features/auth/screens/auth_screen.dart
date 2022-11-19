@@ -5,6 +5,7 @@ import 'package:amazon_clone/features/auth/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 enum Auth {
   signIn,
@@ -54,6 +55,8 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var text = Theme.of(context).textTheme;
+
     return Scaffold(
       backgroundColor: GlobalVariables.greyBackgroundCOlor,
       body: SafeArea(
@@ -62,10 +65,15 @@ class _AuthScreenState extends State<AuthScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Welcome",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+              Spacer(),
+              Text(
+                "Welcome,",
+                style: text.displayMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+                // style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
               ),
+              const Spacer(),
               //Radio button sign up
 
               ListTile(
@@ -78,15 +86,26 @@ class _AuthScreenState extends State<AuthScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                leading: Radio(
-                    activeColor: GlobalVariables.secondaryColor,
-                    value: Auth.signUp,
-                    groupValue: _auth,
-                    onChanged: (Auth? val) {
-                      setState(() {
-                        _auth = val!;
-                      });
-                    }),
+                leading: NeumorphicRadio(
+                  // activeColor: GlobalVariables.secondaryColor,
+
+                  style: const NeumorphicRadioStyle(
+                    boxShape: NeumorphicBoxShape.circle(),
+                    intensity: 18,
+                    // selectedColor: GlobalVariables.secondaryColor,
+                  ),
+                  value: Auth.signUp,
+                  groupValue: _auth,
+                  onChanged: (Auth? val) {
+                    setState(() {
+                      _auth = val!;
+                    });
+                  },
+                  child: const Icon(
+                    Icons.radio_button_checked_outlined,
+                    size: 25,
+                  ),
+                ),
               ),
 
               if (_auth == Auth.signUp)
@@ -134,22 +153,35 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
 
               //Radio button sign in
-              ListTile(
-                title: const Text(
-                  "Sign in",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+              Neumorphic(
+                margin: const EdgeInsets.only(top: 10),
+                child: ListTile(
+                  title: const Text(
+                    "Sign in",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                leading: Radio(
-                    activeColor: GlobalVariables.secondaryColor,
+                  leading: NeumorphicRadio(
+                    // activeColor: GlobalVariables.secondaryColor,
+                    style: const NeumorphicRadioStyle(
+                      boxShape: NeumorphicBoxShape.circle(),
+                      intensity: 18,
+                      // selectedColor: GlobalVariables.secondaryColor,
+                    ),
                     value: Auth.signIn,
                     groupValue: _auth,
                     onChanged: (Auth? val) {
                       setState(() {
                         _auth = val!;
                       });
-                    }),
+                    },
+                    child: const Icon(
+                      Icons.radio_button_checked_outlined,
+                      size: 25,
+                    ),
+                  ),
+                ),
               ),
               if (_auth == Auth.signIn)
                 Form(
