@@ -35,7 +35,7 @@ mongoose.connect(DB).then(() => {
 //GET, PUT, POST, DELETE, UPDATE = CRUD  
 
 //we need to specify "0.0.0.0" as it wont work on android emulators
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`Connected at port ${PORT} hello`);
  
 } ) 
