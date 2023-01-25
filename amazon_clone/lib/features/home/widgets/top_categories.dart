@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class TopCategories extends StatelessWidget {
   const TopCategories({Key? key}) : super(key: key);
@@ -28,23 +29,34 @@ class TopCategories extends StatelessWidget {
                 context),
             child: Column(
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: Image.asset(
-                      GlobalVariables.categoryImages[index]['image'].toString(),
-                      fit: BoxFit.cover,
-                      height: 40,
-                      width: 40,
+                Neumorphic(
+                  drawSurfaceAboveChild: true,
+                  style: NeumorphicStyle(
+                    shape: NeumorphicShape.concave,
+                    boxShape: NeumorphicBoxShape.circle(),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Image.asset(
+                        GlobalVariables.categoryImages[index]['image']
+                            .toString(),
+                        fit: BoxFit.cover,
+                        height: 40,
+                        width: 40,
+                      ),
                     ),
                   ),
                 ),
-                Text(
-                  GlobalVariables.categoryImages[index]['title'].toString(),
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
+                Padding(
+                  padding: const EdgeInsets.only(top: 3.0),
+                  child: Text(
+                    GlobalVariables.categoryImages[index]['title'].toString(),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 )
               ],

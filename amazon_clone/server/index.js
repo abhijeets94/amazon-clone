@@ -9,13 +9,10 @@ const adminRouter = require('./routes/admin');
 const productRouter = require("./routes/product");
 const userRouter = require("./routes/user");
 
-
-
-
 //INIT
 
 //first api using express
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express(); //creating object
 const DB = "mongodb+srv://abhijeets94:abhijeet1234@cluster0.7ur2yjy.mongodb.net/?retryWrites=true&w=majority"
 
